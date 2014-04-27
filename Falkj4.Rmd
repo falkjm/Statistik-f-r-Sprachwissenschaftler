@@ -115,7 +115,7 @@ print(my.data**3)
 # Wenn nicht, ist der Code oben korrekt? Warum?
 # Schreiben Sie Ihre Antwort als Comment hier.
 
-# antwort_hier
+# There could be two Modalwerten if the both appear with the same frequency in a group of numbers.  The R-code seemed as if it would only give one Modalwert though.
 
 # Als Abscheid ein Beispiel mit der Darstellung Frequenzdaten mit Säulendiagramm
 # bzw. Histogramm
