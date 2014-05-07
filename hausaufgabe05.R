@@ -1,6 +1,6 @@
 # Hausaufgabe 05
-# Phillip Alday <phillip.alday@staff.uni-marburg.de>
-# 2014-05-02
+# Michael Falk <Falkj@students.uni-marburg.de>
+# 2014-05-07
 # Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
 
 # Sie sollten die Datei auch in Ihren Ordner kopieren und einen Commit machen, 
