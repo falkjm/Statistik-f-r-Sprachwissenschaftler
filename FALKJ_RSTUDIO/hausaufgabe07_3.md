@@ -160,6 +160,7 @@ Wir können das konkreter machen: welcher Anteil der Studenten bekommt bei den j
 ```r
 pnorm(13, mean = mu, sd = 3, lower.tail = FALSE)
 ```
+pnorm(13,mean=mu,sd=3,lower.tail=FALSE)
 
 ```
 ## [1] 0.04779
