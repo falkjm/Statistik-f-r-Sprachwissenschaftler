@@ -146,13 +146,14 @@ library(ggplot2)
 ggplot(data = noten.dist, aes(x = Notenpunkte, y = P, color = Standardabweichung)) + 
     geom_line() + scale_x_continuous(limits = c(0, 16))
 ```
-ggplot(data=noten.dist, aes(x=Notenpunkte, y=P, coloor = Standardabweichung))+geom_line()+scale_x_continuous(limits=c(0, 16))
+ggplot(data=noten.dist, aes(x=Notenpunkte, y=P, color = Standardabweichung))+geom_line()+scale_x_continuous(limits=c(0, 16))
 
 ![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5.png) 
 
 Ich habe die Grenzen der Grafik ein bisschen breiter gestellt, sodass man die Endpunkte klar sieht und Sie auch einen weiteren `ggplot`-Befehl kennen lernen. 
 
 Welche Verteilung sieht am fairsten aus? Warum?
+Standardabweichung fuenf seems to be the fairest since it is a Bell Curve which means most of the students fall somewhere in the middle.
 
 Wir können das konkreter machen: welcher Anteil der Studenten bekommt bei den jeweiligen Verteilungen eine 1 (zumindest 13 NP)? Für die Verteilung mit $\sigma = 3$ sieht die Berechnung mit R so aus:
 
