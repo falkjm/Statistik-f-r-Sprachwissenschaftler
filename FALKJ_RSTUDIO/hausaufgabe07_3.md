@@ -171,6 +171,7 @@ Oder vielleicht interessiert uns der Anteil der Durchgefallenen (< 5NP):
 ```r
 pnorm(5, mean = mu, sd = 3)
 ```
+pnorm(5,mean=mu,sd=3)
 
 ```
 ## [1] 0.1587
