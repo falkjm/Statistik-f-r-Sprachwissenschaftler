@@ -181,14 +181,26 @@ pnorm(5,mean=mu,sd=3)
 Wenn wir das für alle drei Gruppen wiederholen möchten, ist es ziemlich ärgerlich, wenn wir jede Gruppe einzeln eingeben müssen. Dafür können wir eine **`for`-Schleife** nutzen:
 
 
-```r
+
+  ```r
 for (s in c(3, 4, 5)) {
-    durchfall <- pnorm(5, mean = mu, sd = s)
-    output <- paste("Bei einer Standabweichung von", s, "fallen", durchfall * 
-        100, "% durch.")
-    print(output)
+  durchfall <- pnorm(5, mean = mu, sd = s)
+  output <- paste("Bei einer Standabweichung von", s, "fallen", durchfall * 
+                    100, "% durch.")
+  print(output)
 }
 ```
+for (s in c(3,4,5))
+  durchfall <- pnorm(5, mean = mu, sd = s)
+output <- paste("Bei einer Standardabweichung von", s, "fallen", durchfall * 100, "% durch.")
+print(output)
+
+for (s in c(3, 4, 5)) {
+  durchfall <- pnorm(5, mean = mu, sd = s)
+  output <- paste("Bei einer Standabweichung von", s, "fallen", durchfall * 
+                    100, "% durch.")
+  print(output)
+}
 
 ```
 ## [1] "Bei einer Standabweichung von 3 fallen 15.8655253931457 % durch."
