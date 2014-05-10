@@ -317,6 +317,9 @@ ggplot(data = noten.dist, aes(x=Notenpunkte, y = Anzahl, color = Standardabweich
   geom_line() + scale_x_continuous(limits = c(0, 16))
 
 
+
+
+
 Beantworten Sie ein paar Fragen über die Verteilung, indem Sie den passenden R-Code einsetzen:
 
 1. Wie viele Studenten bekommen zwischen 7 und 9 NP bei einer Standardabweichung von 3?
@@ -327,15 +330,18 @@ Beantworten Sie ein paar Fragen über die Verteilung, indem Sie den passenden R-
 
 2. Wie viele Studenten bekommen zumindest 10 NP?
 
-    `code_hier` Studenten bekommen zumindest 10 Notenpunkte.
+    pnorm(10,mean=mu,sd=3,lower.tail=FALSE) 
+#50*25%=12.5 Studenten bekommen zumindest 10 Notenpunkte.
 
 3. Wie viele Studenten bekommen weniger als 10 NP?
 
-    `code_hier` Studenten bekommen weniger als 10 Notenpunkte.
+    pnorm(9,mean=mu, sd=3) 
+#50*63%=31.5 Studenten bekommen weniger als 10 Notenpunkte.
 
 4. Wie viele Studenten bekommen weniger als 8 NP?
 
-    `code_hier` Studenten bekommen weniger als 8 Notenpunkte.
+    pnorm(7,mean=mu, sd=3) 
+#50*36%=18 Studenten bekommen weniger als 8 Notenpunkte.
 
 
 (Die Einrückung mit 4 Leerschlägen ist die Syntax für mehrere Absätze pro Punkt auf der Liste.)
@@ -347,7 +353,10 @@ Um überdurchschnittlich zu sein, muss man mehr als 8 Notenpunkte bekommen.
 
 Nicht so überraschend, dass "überdurchschnittlich" auch "mehr Punkte als den Durchschnitt bekommen" heißt! Wie sieht es aus, wenn wir besser als 99% der anderen abschließen möchten?
 
-Um in dem besten 1% abzuschließen, muss man zumindest `code_hier` Notenpunkte bekommen.
+Um in dem besten 1% abzuschließen, muss man zumindest 
+qnorm(0.99,mean=8,sd=3)
+#14.979 Notenpunkte bekommen. 
+
 
 ## z-Transformation
 Bei der Überprüfung der Lehrqualität scheint es der Verwaltung, dass ein gewisser Dozent andere Noten als andere Dozenten vergibt. Es wird entschieden, dass der Notenspiegel bei den Teilnehmern in einem von seinen Kursen getestet wird, um zu schauen, ob er sich von signifikant von der idealisierten Notenverteilung ($\mu=8,\sigma=3$) unterscheidet. Um zu zeigen, dass Gott $\alpha=0.06$ so viel liebt wie $\alpha=0.05$ (<a href="http://dx.doi.org/10.1037/0003-066X.44.10.1276">Rosnow & Rosenthal, 1989</a>), setzt die Verwaltung das Signikanzniveau auf 0.06. 
