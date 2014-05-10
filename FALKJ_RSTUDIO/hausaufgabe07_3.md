@@ -361,26 +361,46 @@ qnorm(0.99,mean=8,sd=3)
 ## z-Transformation
 Bei der Überprüfung der Lehrqualität scheint es der Verwaltung, dass ein gewisser Dozent andere Noten als andere Dozenten vergibt. Es wird entschieden, dass der Notenspiegel bei den Teilnehmern in einem von seinen Kursen getestet wird, um zu schauen, ob er sich von signifikant von der idealisierten Notenverteilung ($\mu=8,\sigma=3$) unterscheidet. Um zu zeigen, dass Gott $\alpha=0.06$ so viel liebt wie $\alpha=0.05$ (<a href="http://dx.doi.org/10.1037/0003-066X.44.10.1276">Rosnow & Rosenthal, 1989</a>), setzt die Verwaltung das Signikanzniveau auf 0.06. 
 
-Der kritische Wert für einen einseitigen $z$-Test ist `code_hier`.
+Der kritische Wert für einen einseitigen $z$-Test ist 
+qnorm(0.94)
+#[1]1.554774
 
-Die kritischen Werte für einen zweiseitigen $z$-Test sind $\pm$`code_hier`.
+Die kritischen Werte für einen zweiseitigen $z$-Test sind $\pm$
+  qnorm(0.97)
+#[1]1.880794
 
 ### Gibt es einen Unterschied?
 Bei diesem Dozenten ist die Verwaltung wirklich unsicher, ob und was für einen Unterschied es geben könnte. (Welche Testart sollte man hier nutzen?)
 
 In einem kleinen Seminar mit 7 Studenten beträgt der Durchschnittswert 10. Unterscheidet sich der Notenspiegel von dem idealen? Berechnen Sie den $z$-Test:
 
-code_hier
+n<-7
+m<-10
+mu<-8
+sd<-3
+z<-sqrt(n)*((m-mu)/sd)
+z
+#[1]1.763834 < 1.880794 Kritischer Wert.
+#Das ist ein insignifikanter Unterschied.
 
 Das ist ein **_eins_von_signifikanter_insignifikanter_** Unterschied. 
 
 In einer Vorlesung vom selben Dozenten mit 50 Teilnehmern beträgt der Durchschnittswert wieder 10. (Es scheint, dass der Dozent 10 besonders toll findet.) Berechnen Sie den $z$-Test:
 
-code_hier
+n<-50
+m<-10
+mu<-8
+sd<-3
+z<-sqrt(n)*((m-mu)/sd)
+z
+#[1]4.714045 > 1.880794 Kritischer Wert.
+#Das ist ein signifikanter Unterschied.
 
 Das ist ein **_eins_von_signifikanter_insignifikanter_** Unterschied. 
 
-Ist die Benotung vom Dozenten weniger als ideal? 
+Ist die Benotung vom Dozenten weniger als ideal?
+
+Yes, their grading is less than ideal because of the significant different between the Kritischer Wert and the "Z" score for the second group of 50 students.
 
 ### Ein anderer, böserer? Dozent
 Die Verwaltung ist auch auf einen anderen Dozenten aufmerksam geworden, weil manche Studenten behaupten, er würde zu streng benoten. (Welche Testart sollte man hier nutzen?)
