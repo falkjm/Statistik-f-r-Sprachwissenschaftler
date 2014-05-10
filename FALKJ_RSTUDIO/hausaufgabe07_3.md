@@ -233,7 +233,7 @@ Schiefe (*skewness*) beschriebt die (A)Symmetrie einer Verteilung. Eine Verteilu
 
 Die Verteilung von Noten ist oft schief mit mehr guten Noten. Ist die Verteilung rechts- oder linksschief?
 
-antwort_hier
+With more good grades the right side would be wider, so the distribution would be "rechtsschief" with the peak on the left side..
 
 Vielleicht hilft folgende Grafik mit der Visualisierung:
 
