@@ -140,11 +140,13 @@ Das funktioniert, weil alles rechts von `<-` zuerst gemacht wird. *Die Zuweisung
 
 ```r
 library(ggplot2)
+library(ggplot2)
 # we use geom_line() because dnorm() already gave us the densities!  we onle
 # use geom_density() when ggplot should calculate the density for us
 ggplot(data = noten.dist, aes(x = Notenpunkte, y = P, color = Standardabweichung)) + 
     geom_line() + scale_x_continuous(limits = c(0, 16))
 ```
+ggplot(data=noten.dist, aes(x=Notenpunkte, y=P, coloor = Standardabweichung))+geom_line()+scale_x_continuous(limits=c(0, 16))
 
 ![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5.png) 
 
