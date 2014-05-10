@@ -132,6 +132,7 @@ Wir müssen den Output von `melt()` natürlich einer Variable zuweisen. Wir kön
 ```r
 noten.dist <- melt(noten.dist, id.vars = "Notenpunkte", value.name = "P", variable.name = "Standardabweichung")
 ```
+noten.dist<-melt(noten.dist,id.vars="Notenpunkte",value.name="P",variable.name="Standardabweichung")
 
 
 Das funktioniert, weil alles rechts von `<-` zuerst gemacht wird. *Die Zuweisung findet erst nach der Evaluation der rechten Seite statt!* Jetzt können wir alle drei Verteilungen mit einem `ggplot`-Befehl grafisch darstellen. 
