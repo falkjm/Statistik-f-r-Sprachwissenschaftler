@@ -220,11 +220,11 @@ for (s in c(3,4,5)){
 
 Wie steht die Anzahl guter Noten in Beziehung zur Anzahl schlechter Noten? 
 
-antwort_hier
+The percentage of students with very good grades was much smaller in all three Standard Deviation categories compared to the percentage of students failing the course.   
 
 Warum?
 
-antwort_hier
+The considered Standar Deviation was higher.  If more students got a medium-lower grade, then they will also be included in the lowest grade category for this calculation.  The curve for these numbers would lean heavily to the left.
 
 ## Kurtosis und Schiefe
 Kurtosis (im Deutschen auch *Wölbung*) ist ein Maß dafür, wie spitz eine Verteilung ist. Die Normalverteilung wird nie zu extrem spitz -- der Gipfel bleibt immer schön rund, obwohl er manchmal eng wird. Andere Verteilungen (z.B. die Laplace-Verteilung ) haben Gipfel, die nicht rund sind.   
