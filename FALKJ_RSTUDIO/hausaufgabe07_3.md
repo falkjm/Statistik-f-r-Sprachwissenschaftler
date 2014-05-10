@@ -32,6 +32,14 @@ fuenf <- dnorm(noten, mean = mu, sd = 5)
 noten.dist <- data.frame(Notenpunkte = noten, drei, vier, fuenf)
 noten.dist
 ```
+noten<-1:15
+mu<-8
+drei<-dnorm(noten,mean=mu,sd=3)
+vier<-dnorm(noten,mean=mu,sd=4)
+fuenf<-dnorm(noten,mean=mu,sd=5)
+noten.dist<-data.frame(Notenpunkte=noten,drei,vier,fuenf)
+noten.dist
+
 
 ```
 ##    Notenpunkte     drei    vier   fuenf
@@ -60,10 +68,12 @@ Die Funktion heißt `melt()` (*schmelzen*) aus der Analogie zu Schmieden, wo die
 
 ```r
 library(reshape2)
+library(reshape2)
 # value.name is the name of the new column with the values that were
 # previously spread out over several columns variable.name is the name of
 # the new column with the old column names
 melt(noten.dist, id.vars = "Notenpunkte", value.name = "P", variable.name = "Standardabweichung")
+melt(noten.dist,id.vars="Notenpunkte",value.name="P",variable.name="Standardabweichung")
 ```
 
 ```
