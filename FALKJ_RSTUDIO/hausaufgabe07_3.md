@@ -409,7 +409,14 @@ In einem mittelgroßen Seminar mit 20 Studenten beträgt der Durchschnittswert 7
 
 Berechnen Sie den $z$-Test:
 
-code_hier
+n<-20
+m<-7
+mu<-8
+sd<-3
+z<-sqrt(n)*((m-mu)/sd)
+z
+#[1]-1.490712 < 1.554774 kritischer Wert für ein einseitiger Z-Test
+#Das ist ein insignifikanter Unterschied.
 
 Das ist ein **_eins_von_signifikanter_insignifikanter_** Unterschied. 
 
@@ -417,12 +424,26 @@ Später ergibt sich, dass es eigentlich 25 Studenten im Kurs gab. (Der Dozent ha
 
 Berechnen Sie den $z$-Test:
 
-code_hier
+n<-25
+m<-7
+mu<-8
+sd<-3
+z<-sqrt(n)*((m-mu)/sd)
+z
+#[1]-1.666667 < 1.554774 kritischer Wert für ein einseitiger Z-Test
+#Das ist auch ein insignifikanter Unterschied.
 
 Das ist ein **_eins_von_signifikanter_insignifikanter_** Unterschied. 
 
 ## Zum Überlegen
 Gibt es einen Grund, weshalb die Noten normal verteilt sein sollten? Warum ist das die übliche Annahme?
+Schools want the students to be challenged in such a way 
+that the average person will learn well and have a good 
+performance.  There will always be those that are below 
+average and those that are above average, but the average 
+should include most of the people.  I believe this way the 
+teachers know that the material is not to easy and not too 
+hard for the majority of the group.
 
 # Bibliografie
 
