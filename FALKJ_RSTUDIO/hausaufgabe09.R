@@ -1,6 +1,6 @@
 # Hausaufgabe 09
-# Phillip Alday <phillip.alday@staff.uni-marburg.de>
-# 2014-05-02
+# Michael Falk <Falkj@students.uni-marburg.de>
+# 2014-05-15
 # Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
 
 
@@ -35,12 +35,17 @@
 
 # Weil wir uns immer die Daten auch grafisch anschauen, laden wir jetzt schon ggplot
 library(ggplot2)
+library(ggplot2)
+
 # car laden wir auch für später
 library(car)
+library(car)
+
 # car steht übrigens für "Companion to Appled Regression"
 
 # und danach die Daten:
 rt <- read.table("punkt_rt.tab",header=TRUE) 
+rt<- read.table("punkt_rt.tab",header=TRUE)
 # Die Daten sind Reaktionszeiten von zwei Versuchspersonen auf einen weißen
 # Punkt auf einem schwarzen Bildschirm. Die Verzögerung (delay) zwischen Trials
 # (Läufen) war zufällig und mitaugenommen. 
@@ -51,13 +56,17 @@ rt <- read.table("punkt_rt.tab",header=TRUE)
 
 # Wir schauen uns erst mal eine Zusammenfassung der Daten an:
 # print(summary(rt))
+print(summary(rt))
 
 # Wir sehen sofort, dass R die Variabel "subj" als numerische Variable
 # behandelt hat, obwohl sie eigentlich kategorisch ist. Das müssen wir ändern:
 # rt$subj <- as.factor(rt$subj)
+rt$subj <- as.factor(rt$subj)
 # 
 # rt.plot <- qplot(x=RT,color=subj,fill=subj,data=rt, geom="density",alpha=I(0.3))
+rt.plot <- qplot(x=RT,color=subj,fill=subj,data=rt, geom="density",alpha=I(0.3))
 # print(rt.plot)
+print(rt.plot)
 
 # Haben die Daten der beiden Gruppen -- die wiederholten Messwerte der einzelnen
 # Probanden bilden ja Gruppen -- homogene Varianz? Bevor Sie irgendwelche Tests 
