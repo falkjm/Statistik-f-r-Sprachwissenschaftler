@@ -78,14 +78,39 @@ print(rt.plot)
 # Sie von vorneherein etwas behaupten haben.
 
 # Berechnen Sie jetzt den F-Test:
-#print(CODE_HIER)
+subj.1 <- rt[rt$subj == "1", "RT"]
+subj.2 <- rt[rt$subj == "2", "RT"]
+
+var.test(subj.1, subj.2)
+
+mean(subj.1)
+mean(subj.2)
+zaehler=mean(subj.1)-mean(subj.2)
+zaehler
+
+pooled = (var(subj.1) + var(subj.2))/2
+pooled
+
+nenner=sqrt((pooled/length(subj.1))+(pooled/length(subj.2)))
+nenner
+
+t_wert=zaehler/nenner
+t_wert
+
+dfs=length(subj.1)-1 + length(subj.2)-1
+dfs
+
+abs(qt(0.025,df=18))
 
 # Sind die Varianzen homogen? Vergessen Sie nicht, dass die Nullhypothese beim
 # F-Test "Varianzen Ungleich" ist.
+P-Value is 0.04371 which is lower than 0.05, therefore the variances are considered equal.
 
 # Berechenen Sie den Levene Test:
-#print(CODE_HIER)
+library(car)
+leveneTest(rt$RT~rt$subj)
 
+The Pr(>F) is 0.3656 which is greater than 0.05.  This means that the variablity of both groups is about the same.
 # Sind die Varianzen homogen? Vergessen Sie nicht, dass die Nullhypothese beim
 # Levene Test "Varianzen Gleich" ist.
 
