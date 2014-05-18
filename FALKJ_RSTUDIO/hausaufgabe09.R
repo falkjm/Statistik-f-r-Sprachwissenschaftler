@@ -143,7 +143,7 @@ print(paste("Die Differenz zwischen den beiden t-Werten ist",t.diff,"."))
 # Sind die Daten normal verteilt? Wir berechnen Sie den Shapiro Test für erste Versuchsperson:
 # shapiro <- shapiro.test(rt[rt$subj==1,"RT"])
 shapiro<-shapiro.test(rt[rt$subj==1,"RT"])
-# 
+ 
 # print(shapiro)
 print(shapiro)
 
@@ -207,16 +207,68 @@ withint the 5.0 - 5.5 area of Reaction Time.
 # ausdrücken, ob die Varianzen homogen sind.
 
 # CODE_HIER
+var.test(rt$logRT~rt$subj)
+FTest<-var.test(rt$logRT~rt$subj)
+if (FTest$p.value > 0.05){
+   print("FTest test insignikant, die Daten sind normal verteilt.")
+ }else{
+   print("FTest test signikant, die Daten sind nicht normal verteilt.")
+ }
 
-# Sind die Daten "normaler" gewordern? Berechnen Sie den Shapiro-Test für beide 
+library(car)
+leveneTest(rt$logRT~rt$subj)
+levene<-leveneTest(rt$logRT~rt$subj)
+if (levene$p.value > 0.05){
+   print("levene test insignikant, die Daten sind normal verteilt.")
+ }else{
+   print("levene test signikant, die Daten sind nicht normal verteilt.")
+ }
+
+
+
+
+# Sind die Daten "normaler" gewordern? 
+According to the F-Test + If-Block, no they are not more normal.
+The If-block for the leveneTest did not work.
+
+Berechnen Sie den Shapiro-Test für beide
+shapiro<-shapiro.test(rt[rt$subj==1,"RT"])
+print(shapiro)
+
+if (shapiro$p.value > 0.05){
+   print("Shapiro's test insignikant, die Daten sind normal verteilt.")
+ }else{
+   print("Shapiro's test signikant, die Daten sind nicht normal verteilt.")
+ }
+
+shapiro<-shapiro.test(rt$subj==2,"RT")
+print(shapiro)
+
+if (shapiro$p.value > 0.05){
+   print("Shapiro's test insignikant, die Daten sind normal verteilt.")
+ }else{
+   print("Shapiro's test signikant, die Daten sind nicht normal verteilt.")
+ }
+
+
 # Gruppen. Nach jeder Gruppe sollten Sie auch programmatisch (=durch if-Blöcke)
 # ausdrücken, ob die Daten normal verteilt sind. 
 # (Für die fortgeschrittenen: hier könnte man auch eine for-Schleife nutzen...)
 
 # CODE_HIER
 
-# Hat die logarithmische Transformation insgesamt geholfen? Berechnen Sie zum
+# Hat die logarithmische Transformation insgesamt geholfen?
+According to the "If-Blocks", the log Tranformation did help.
+
+
+#Berechnen Sie zum
 # Schluss den (Welch) t-Test für die logarithmischen Daten. Bekommen Sie das
 # gleiche Ergebnisse wie bei den Ausgangsdaten?
 
 # CODE_HIER
+welch<-t.test(rt[rt$subj==1,"logRT"],rt[rt$subj==2,"logRT"])
+print(welch)
+
+The p-value is 0.024 which is less than 0.05.  
+I assume this means that subj.1 and subj.2 are not 
+homogeneous.
