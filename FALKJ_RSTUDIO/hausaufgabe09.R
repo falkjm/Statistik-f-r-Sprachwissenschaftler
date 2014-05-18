@@ -181,11 +181,27 @@ if (shapiro$p.value > 0.05){
 # Die logaritmische Verteilung ist ziemlich beliebt bei Reaktionszeitsdaten.
 
 # rt$logRT <- log(rt$RT)
+rt$logRT<-log(rt$RT)
 # print(summary(rt$logRT))
+print(summary(rt$logRT))
+
 # logrt.plot <- CODE_HIER
-# print(logrt.plot)
+library(ggplot2)
+logrt.plot<-qplot(x=RT,data=rt§logRT,geom="density",fill=subj,alpha=I(0.3))
+print(logrt.plot)
+
+#alternative plot:
+d<-density(rt$logRT)
+plot(d)
+
 
 # Sieht die Verteilung besser aus? Sind die Varianzen "homogener" geworden? 
+They seem to be more homogenous as the large pink density 
+form is sharing more space with the blue.  The small pink 
+density form is further away from the large pink density 
+form.  This shows that most of subj.1 and subj.2 are 
+withint the 5.0 - 5.5 area of Reaction Time.
+
 # Berechnen Sie den F-Test und den Levene-Test für die logaritmisch skalierten 
 # Daten. Nach jedem Test sollten Sie auch programmatisch (=durch if-Blöcke)
 # ausdrücken, ob die Varianzen homogen sind.
