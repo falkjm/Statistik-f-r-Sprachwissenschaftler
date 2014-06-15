@@ -45,6 +45,95 @@ Mögliche Ausgangsfragen sind unter anderem:
 * Gibt es einen Zusammenhang zwischen Farbe und Klarheit? Zwischen Farbe und Carat? Zwischen Farbe und Tiefe?
 * ...
 
+My Questions:
+
+Lead Question:
+How is the Price of a diamond affected by the variable "Cut" 
+in combination with other variables?
+
+Follow-up Questions:
+1) How does Cut + Table affect the Price of a diamond?
+2) How does Cut + Color affect the Price of a diamond?
+3) How does Cut + Carat affect the Price of a diamond?
+4) How does Cut + Clarity affect the Price of a diamond?
+
+Part 1: Cut + Table
+
+aov(price~cut+table,data=diamonds)
+summary(aov(price~cut+table,data=diamonds))
+
+diamonds.CTP <- aggregate(price~cut*table,data=diamonds,FUN=mean)
+library(xtable)
+print(xtable(diamonds.CTP),type="html",include.rownames=FALSE)
+
+library(reshape2)
+diamonds.CTP.wide1 <- dcast(diamonds.CTP,cut~table,value.var="price")
+print(xtable(diamonds.CTP),type="html",include.rownames=FALSE)
+
+library(ggplot2)
+ggplot(diamonds.CTP,aes(x=table,y=price,color=cut))+geom_point()
+
+qplot(price,table,data=diamonds.CTP,color=cut)
+
+
+Part 2: Cut + Color
+
+aov(price~cut+color,data=diamonds)
+summary(aov(price~cut+color,data=diamonds))
+
+diamonds.CCoP <- aggregate(price~cut*color,data=diamonds,FUN=mean)
+library(xtable)
+print(xtable(diamonds.CCoP),type="html",include.rownames=FALSE)
+
+library(reshape2)
+diamonds.CCoP.wide1 <- dcast(diamonds.CCoP,cut~table,value.var="price")
+print(xtable(diamonds.CCoP),type="html",include.rownames=FALSE)
+
+library(ggplot2)
+ggplot(diamonds.CCoP,aes(x=price,y=color,color=cut))+geom_point()
+
+qplot(color,price,data=diamonds.CCoP,color=cut)
+
+
+Part 3: Cut + Carat
+
+aov(price~cut+carat,data=diamonds)
+summary(aov(price~cut+carat,data=diamonds))
+
+diamonds.CCaP <- aggregate(price~cut*carat,data=diamonds,FUN=mean)
+library(xtable)
+print(xtable(diamonds.CCaP),type="html",include.rownames=FALSE)
+
+library(reshape2)
+diamonds.CCaP.wide1 <- dcast(diamonds.CCaP,cut~carat,value.var="price")
+print(xtable(diamonds.CCaP),type="html",include.rownames=FALSE)
+
+library(ggplot2)
+ggplot(diamonds.CCaP,aes(x=carat,y=price,color=cut))+geom_point()
+
+qplot(carat,price,data=diamonds.CCaP,color=cut)
+
+
+
+Part 4: Cut + Clarity
+
+aov(price~cut+clarity,data=diamonds)
+summary(aov(price~cut+clarity,data=diamonds))
+
+diamonds.CClP <- aggregate(price~cut*clarity,data=diamonds,FUN=mean)
+library(xtable)
+print(xtable(diamonds.CClP),type="html",include.rownames=FALSE)
+
+library(reshape2)
+diamonds.CClP.wide1 <- dcast(diamonds.CClP,cut~clarity,value.var="price")
+print(xtable(diamonds.CClP),type="html",include.rownames=FALSE)
+
+library(ggplot2)
+ggplot(diamonds,aes(x=clarity,y=price,color=cut))+geom_point()
+
+qplot(clarity,price,data=diamonds.CClP,color=cut)
+
+
 *Vergessen Sie dabei nicht, dass wir bisher nur Methoden gelernt haben, wo die abhängige Variable zumindest intervallskaliert ist!*
 
 Sie können sich auch [das *ggplot* Buch](http://dx.doi.org/10.1007/978-0-387-98141-3) zur Inspiration anschauen, v.a. Abbildungen 4.7, 4.8, 4.9, 5.2, 5.3, 5.4, 5.6, 5.14, 7.16, 9.1  und Kapitel 2.2-2.5 könnten inspirierend wirken. Den Code zur Erstellung der Figuren findet man immer im Haupttext.
@@ -53,13 +142,23 @@ Sie können sich auch [das *ggplot* Buch](http://dx.doi.org/10.1007/978-0-387-98
 
 Hier ein paar Grafiken (auch im Buch zu finden):
 ```{r}
+library(ggplot2)
 ggplot(diamonds,aes(x=carat,y=price,color=color)) + geom_point()
 ggplot(diamonds,aes(x=carat,y=price,color=color)) + geom_point(alpha=0.3)
 ggplot(diamonds,aes(x=carat,y=price,color=color)) + geom_point() + facet_wrap(~color)
+
 ```
+
 
 # Noch eine Überlegung
 Haben Sie dabei explorativ oder konfirmativ gearbeitet? Was hat das für eine Auswirkung auf die Interpretation der Ergebnisse?
+I worked in a more explorative manner.  I would say that
+it produced some graphs that were not very spectacular
+because of variables that have qualitative measurements 
+rather than numerical measurements.  Two variables with 
+qualitative measurements created a rather dull graph.
+Two variables with numerical measurements created more
+interesting and spectacular graphs.
 
 # Lizenz
 Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
