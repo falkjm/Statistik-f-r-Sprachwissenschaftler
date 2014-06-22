@@ -37,6 +37,8 @@
 # Weil wir uns immer die Daten auch grafisch anschauen, laden wir jetzt schon ggplot
 library(ggplot2)
 
+library(ggplot2)
+
 # Wir fangen mit einem einfachen künstlichen Datensatz an. Sie sehen hier die
 # Formlen für die Variablen.
 x1 = 1:10
@@ -44,18 +46,30 @@ x2 = 2*x1
 y = x1 + x2
 linreg <- data.frame(x1,x2,y)
 
+x1 = 1:10
+x2 = 2*x1
+y = x1 + x2
+linreg <- data.frame(x1,x2,y)
+
 # Wir können y ~ x1 und y ~ x2 einzel plotten:
 # ggplot(linreg,aes(x=x1,y=y)) + geom_point() + geom_smooth(method="lm")
+ggplot(linreg,aes(x=x1,y=y)) + geom_point() + geom_smooth(method="lm")
+
 # ggplot(linreg,aes(x=x2,y=y)) + geom_point() + geom_smooth(method="lm")
+ggplot(linreg,aes(x=x2,y=y)) + geom_point() + geom_smooth(method="lm")
 
 # Die Linie passt sehr gut zu den Punkten, was wir hätten erwarten sollen, denn
 # wir haben y aus einfachen Summen von x1 und x2 berechnet. Wir berechnen
 # zunächst die lineare Regression für die einzelnen unabhängige Variablen.
 
 # CODE_HIER (x1)
+linreg.x1 <- lm(y ~ x1, data=linreg)
+summary(linreg.x1)
 
 
 # CODE_HIER (x2)
+linreg.x2 <- lm(y ~ x2, data=linreg)
+summary(linreg.x2)
 
 # Was haben Sie für Koeffizeinten bekommen? Wenn wir daran denken, dass x2 = 2*x1 ist, wissen wir, dass 
 # y = x1 + x2
@@ -71,6 +85,7 @@ linreg <- data.frame(x1,x2,y)
 # Wie sieht es aus, wenn wir beide gleichzeitig aufnehmen? Machen wir zuerst eine Grafik:
 # (x1 wird horizontal geplottet, x2 vertikal und y als Größe des Punkts)
 ggplot(linreg,aes(x=x1,y=x2)) + geom_point(aes(size=y))
+ggplot(linreg,aes(x=x1,y=x2)) + geom_point(aes(size=y))
 
 
 # Wir führen zunächst eine Regression aus, wo sowohl x1 als auch x2 Prediktor
@@ -79,31 +94,48 @@ model <- lm(y ~ x1 + x2, data=linreg)
 model.summary <- summary(model)
 print(model.summary)
 
+model <- lm(y ~ x1 + x2, data=linreg) 
+model.summary <- summary(model) 
+print(model.summary)
+
 # Bei x2 steht überall NA -- R könnte keinen eindeutigen Koeffizienten für x2
 # berechnen, weil x1 die gesamte Varianz im Modell (s.o.) erklären kann! Was
 # passiert, wenn wir die Reihenfolge von x1 und x2 in lm() umstellen? Führen Sie
 # die passende Regression aus:
 
 # CODE_HIER
+model.x2 <- lm(y ~ x2 + x1, data=linreg)
+model.x2.summary <- summary(model.x2)
+print(model.x2.summary)
+
 
 # Bei linearen Regression müssen wir immer aufpassen, dass unsere Prediktoren
 # nicht zu stark miteinander korrelieren. Das könnten wir auch mit cor()
 # austesten. Hier sollten Sie schon Pearsons Korrelationkoeffizienten nennen
 # können, ohne folgenden Befehl auszuführen.
 # cor(linreg$x1,linreg$x2)
+cor(linreg$x1,linreg$x2)
+
 
 # Wir laden jetzt einen weiteren Datensatz als Beispiel: 
 # (Sie müssen den folgenden Befehl evtl. anpassen!)
-pyreg <- read.table("Data/pyreg.tab",header=TRUE) 
+pyreg <- read.table("Data/pyreg.tab",header=TRUE)
+pyreg <- read.table(“Data/pyreg.tab”,header=TRUE)
+summary(pyreg)
 
 # Wie linreg hat pyreg drei Spalten x1, x2, y
 # Plotten Sie die Punkte + Regressionslinie für y ~ x1 (wie oben).
 
 # CODE_HIER
+ggplot(pyreg,aes(x=x1,y=y)) + geom_point() + 
+  geom_smooth(method="lm")
+
 
 # Und das gleiche für y ~ x2. 
 
 # CODE_HIER
+ggplot(pyreg,aes(x=x2,y=y)) + geom_point() +
+  geom_smooth(method="lm")
 
 # Berechnen Sie die zwei Regressionsmodelle für y ~ x1 und y ~ x2
 
