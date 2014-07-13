@@ -35,19 +35,23 @@ Wir können Daten direkt von seiner Webseite in R laden:
 
 ```{r}
 stimmen <- read.csv("http://www.bodowinter.com/tutorial/politeness_data.csv")
-```
+
+stimmen<-read.csv("politeness_data.csv")
 
 Wie immer schauen wir uns erstmal die Zusammenfassung der Daten an.
 
 ```{r}
 summary(stimmen)
 ```
+summary(stimmen)
 
 Die Items in dieser Studie sind "Szenarien", also Situationen wo man mehr oder weniger höflich ist: obwohl es einen fixen Faktor für Höflichkeit gibt, ist man evtl. nicht in jeder Situation gleich (un)höflich. Somit haben wir einen zufälligen Faktor, weil wir nicht alle möglichen Szenarien austesten können, obgleich wir erkennen, dass das Szenario einen Teil der Varianz erklären kann. `attitude` ist auch ein Faktor mit zwei Stufen `inf` für *informal* und `pol` für *polite*.  Geschlecht spielt eine bekannte Rolle bei Stimmhöhe und wurde demzufolge auch als `gender` mit aufgenommen. Die Messung der Stimmhöhe in Hertz ist eine metrische Variable, die als `frequency` im data frame zu finden ist. 
 
 Allerdings merken wir, dass `scenario` falsch kodiert ist, was wir korrigieren müssen:
 
 CODE_BLOCK_HIER
+stimmen$scenario <- as.factor(stimmen$scenario)
+
 
 ## Auswirkung der experimentellen Manipulation
 Um einen groben Eindruck zu bekommen, können wir schnell einen Boxplot machen:
@@ -75,10 +79,14 @@ Wir können auf ähnliche Art und Weise ein Plot für die Versuchspersonen und S
 Erstellen Sie einen Boxplot für `frequency` nach `subject`, wie oben für `frequency` nach `attitude` gemacht wurde (hier ohne Aufteilung nach Geschlecht). Dieser gibt uns einen Blick in die Varianz innerhalb und zwischen Versuchspersonen. 
 
 CODE_BLOCK_HIER
+library(ggplot2)
+ggplot(stimmen) + geom_boxplot(aes(x=subject, y=frequency))
+
 
 Machen Sie das gleiche für `scenario`. 
 
 CODE_BLOCK_HIER
+ggplot(stimmen) + geom_boxplot(aes(x=scenario, y=frequency))
 
 Gibt es mehr Varianz zwischen Szenarien oder zwischen Versuchspersonen? 
 
@@ -94,6 +102,7 @@ Wie oben erwähnt, haben wir drei mögliche Effekte, die wir uns anschauen wolle
 Um die Berechnung im folgenden zu beschleunigen, bleiben wir momentan bei einer Intercepts-Only-RE-Struktur. Weil der Effekt von Geschlecht schon aus der Literatur und dem Alltag bekannt ist, nehmen wir das Model nur mit `gender` als Ausgangspunkt. Wir haben auch vor, Modellvergleiche zu machen, daher setzten wir `REML=FALSE` von Anfang an.
 
 ```{r}
+library(lme4)
 model.gender <- lmer(frequency ~ gender + (1|subject) + (1|scenario), data=stimmen, REML=FALSE)
 summary(model.gender)
 ```
@@ -105,6 +114,8 @@ Wir schauen als nächstes den Haupteffekt von `attitude` an:
 model.attitude <- lmer(frequency ~ gender + attitude + (1|subject) + (1|scenario), data=stimmen, REML=FALSE)
 summary(model.attitude)
 ```
+model.attitude <- lmer(frequency ~ gender + attitude + (1|subject) + (1|scenario), data=stimmen, REML=FALSE)
+summary(model.attitude)
 
 Haben sich die Koeffizienten oder Standardfehler geändert?
 
@@ -114,6 +125,10 @@ Jetzt berechen wir das Modell mit der Interaktion zwischen `gender` und `attitud
 #model.attitude.int <- CODE_HIER
 #summary(model.attitude.int)
 ```
+model.attitude.int <- lmer(frequency ~ gender * attitude + (1|subject) + (1|scenario), data=stimmen, REML=FALSE)
+summary(model.attitude.int)
+
+
 
 Haben sich die Koeffizienten oder Standardfehler geändert?
 
@@ -121,7 +136,9 @@ Ist die Interaktion signifikant? Wir können uns den Koeffizienten anschauen, ab
 
 ```{r}
 #anova(model.attitude,model.attitude.int)
-```
+`
+anova(model.attitude,model.attitude.int)
+
 
 Hat die Interkation das Modell verbessert? Wenn ein komplexeres Modell nicht signifikant besser als ein einfacheres Modell ist, bleiben wir bei dem einfacheren Modell! 
 
@@ -139,6 +156,7 @@ Haben sich die Koeffizienten oder Standardfehler (im Vergleich zu `model.attitud
 Hat dieses Modell ein signifikante besseres Fit als `model.attitude`? 
 
 CODE_BLOCK_HIER
+anova(model.attitude,model.attitude.re.slope)
 
 Könnten wir hier ein Intercepts-Only-Modell begründen? 
 
@@ -152,6 +170,7 @@ Auch für gemischte Modelle können wir Konfidenzintervalle berechnen. Der Befeh
 ```{r}
 confint(model.gender)
 ```
+confint(model.gender)
 
 `.sigma` ist die Schätzung der Residual-Varianz, die `.sigXX` sind die anderen zufälligen Effekte.  
 
@@ -164,6 +183,11 @@ effects.attitude <- allEffects(model.attitude)
 summary(effects.attitude)
 plot(effects.attitude)
 ```
+library(effects)
+
+effects.attitude <- allEffects(model.attitude)
+summary(effects.attitude)
+plot(effects.attitude)
 
 Was ist der Unterschied zwischen den Konfidenzintervallen von `confint()` und von `allEffects()`? (D.h., woher kommt der Unterschied?) 
 
@@ -175,12 +199,14 @@ Wir schauen uns zuerst ein Intercept-Only-Modell an:
 ```{r}
 coef(model.attitude)
 ```
+coef(model.attitude)
 
 Wir sehen, dass das Intercept für jedes `subject` und `scenario` ist, aber die Koeffizienten für die Anstige (`genderM` und `attitudepol`) überall gleich sind und zwar die gleichen, die es als fixe Effekte gibt!  Bei dem Modell mit Anstieg in der RE-Struktur gibt es einen Anstieg für jedes `subject` und `scenario`.
 
 ```{r}
 coef(model.attitude.re.slope)
 ```
+coef(model.attitude.re.slope)
 
 Diese Sichtweise -- Regression + Korrektur pro RE-Gruppierung -- war also nicht so verstellt!
 
@@ -191,4 +217,5 @@ bibliography()
 
 # Lizenz
 Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
+Dieses Werk darf weiter als Beispiel benutzt werden.
 
